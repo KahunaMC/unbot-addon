@@ -267,6 +267,25 @@ local function CreateBagsTypeOptions(fromParent, checkedIndex)
 	if (checkedIndex == 5) then
 		BagsTypeOptionsClick(newFrame, fromParent, newFrame.afterRemove);
 	end
+
+	newFrame = CreateFrame("CheckButton",fromParent:GetName().."BagsType6",fromParent,"UnBotBagsTypeTemplate");
+	newFrame.title = newFrame:CreateFontString(newFrame:GetName().."Title","ARTWORK");
+	newFrame.title:SetFont("Fonts\\FRIZQT__.TTF",11);
+	newFrame.title:SetTextColor(1.0,0.8,0,1);
+	newFrame.title:SetText("Give");
+	newFrame.title:SetPoint("TOPLEFT",newFrame,"TOPRIGHT",-2,-10);
+	newFrame.title:SetShadowColor(0,0,0);
+	newFrame.title:SetShadowOffset(1,-1);
+	newFrame:Show();
+	newFrame.parentFrame = fromParent;
+	newFrame.command = UnBotExecuteCommand[90];
+	newFrame.afterRemove = true;
+	newFrame.parentFrameText = UnBotBagsHeadFrameSetFontText(fromParent.raceName, fromParent.target, "Give item");
+	newFrame:SetPoint("TOPRIGHT", fromParent, "TOPRIGHT", -52, -29 * 6 + 37);
+	table.insert(fromParent.optionsType, newFrame);
+	if (checkedIndex == 6) then
+		BagsTypeOptionsClick(newFrame, fromParent, newFrame.afterRemove);
+	end
 end
 
 function BagsTypeOptionsClick(self, bagsFrame, afterRemove)

@@ -19,6 +19,7 @@ UnBotCommandRealize = {
 [79] = CommandFriendsInvite,
 [80] = CommandReadyCheck,
 [88] = CommandAddFriends,
+[90] = CommandGiveItem
 };
 
 UnBotCommandToGroups = {
@@ -112,6 +113,7 @@ UnBotCommandToGroups = {
 [87] = 1,
 [88] = 10,
 [89] = 2,
+[90] = 7
 };
 
 UnBotIconFiles = {
@@ -204,7 +206,8 @@ UnBotIconFiles = {
 [86] = 74,
 [87] = 3598,
 [88] = 174,
-[89] = 103
+[89] = 103,
+[90] = 3966
 };
 
 UnBotTooltipTitle = {
@@ -297,7 +300,8 @@ UnBotTooltipTitle = {
 [86] = "Make a bot go offline",
 [87] = "Make a bot go online",
 [88] = "Add all bots to your friends list",
-[89] = "Grind", -- Needs correction
+[89] = "Grind", -- Needs correction,
+[90] = "Give item"
 };
 
 UnBotTooltipHelp = {
@@ -391,6 +395,7 @@ UnBotTooltipHelp = {
 [87] = "Makes the targeted bot go online.",
 [88] = "Adds all bots in your group to your friends list.",
 [89] = "Make all bots automatically attack nearby creatures that yield experience points.",
+[90] = "Give player an item"
 };
 
 UnBotExecuteCommand = {
@@ -483,6 +488,7 @@ UnBotExecuteCommand = {
 [87] = ".playerbot bot add",
 -- [88] = "add friends"
 [89] = "grind",
+[90] = "g "
 };
 
 --1 = 不需要选择目标
@@ -580,4 +586,5 @@ UnBotCommandType = {
 [87] = 2,
 [88] = 4,
 [89] = 4,
+[90] = 2
 };

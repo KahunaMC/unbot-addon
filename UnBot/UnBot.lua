@@ -7,9 +7,10 @@ function UnBotSplit(str, split_char)
             sub_str_tab[#sub_str_tab + 1] = str;
             break;
         end
+		local posEnd = pos + #split_char;
         local sub_str = string.sub(str, 1, pos - 1);
         sub_str_tab[#sub_str_tab + 1] = sub_str;
-        str = string.sub(str, pos + 1, #str);
+        str = string.sub(str, posEnd, #str);
     end
 
     return sub_str_tab;
@@ -335,10 +336,42 @@ function UnBotDisableAllFrameFlushButton()
 	end
 end
 
+-- Quest Format: "|cFFFFFF00|Hquest:" << quest->GetQuestId() << ':' << quest->GetQuestLevel() << "|h[" << quest->GetTitle() << "]|h|r";
+function WhispAcceptQuest(name, info)
+	local i1, i2 = string.find(info, "Hquest");
+	if (i1 == nil or i2 == nil) then
+		return;
+	end
+	-- Split into quests
+	local ss = string.sub(info, i2-16)
+	-- Print sub one letter at a time to default
+	local textList = UnBotSplit(ss, "|h|r");
+	-- reply to with accept request
+	for i=1, #textList do
+		-- Check the text isnt blank
+		if (textList[i] == nil or textList[i] == "") then
+			break
+		end
+
+		local questInfo = textList[i];
+		local msg = "accept ".. questInfo.. "|h|r";
+		-- DEFAULT_CHAT_FRAME:AddMessage(msg.. " to ".. name)
+		SendChatMessage(msg, "WHISPER", nil, name);
+	end
+end
+
+
 function CaseNormalWhisperMsg(name, info)
-	local i1, i2 = string.find(info, "Select reward");
-	if (i1 ~= nil and i2 ~= nil) then
-		RecvQuestReward(name, info);
+	-- Loop through all the handlers
+	-- If the message matches the handler
+	if (string.find(info, "Choose reward")) then
+		-- Call the handler
+		RecvQuestReward(name, info)
+	elseif string.find(info, "Quest |cff00ff00Available|r") then
+		WhispAcceptQuest(name, info)
+	else
+		-- If no handler is found, print the message
+		-- DEFAULT_CHAT_FRAME:AddMessage("Received: " .. info)
 	end
 end
 

@@ -298,6 +298,27 @@ function CommandUnBotSellItem(index)
 	CreateIconsByUnBotBagsFrame(4, "UnBotSellItem"..targetName,1,true,{},targetName,targetClass,"Sell items",FlushItemsToBags,UnBotExecuteCommand[index],GetItemFunc);
 end
 
+function CommandUnBotTradeItem(index)
+	local targetClass = UnitClass("target");
+	local targetName = UnitName("target");
+	local isParty = UnitInParty("target");
+	local isRaid = UnitInRaid("target");
+	if (targetName == nil or targetName == "") then
+		DisplayInfomation("You have no target.");
+		return;
+	end
+	if (not UnitIsPlayer("target")) then
+		DisplayInfomation("A bot needs to be targetted.");
+		return;
+	end
+	if (isParty == nil and isRaid == nil) then
+		DisplayInfomation("The target is not in your group.");
+		return;
+	end
+
+	CreateIconsByUnBotBagsFrame(6, "UnBotUseItem"..targetName,1,true,{},targetName,targetClass,"Trade items",FlushItemsToBags,UnBotExecuteCommand[index],GetItemFunc);
+end
+
 function CommandUnBotUseItem(index)
 	local targetClass = UnitClass("target");
 	local targetName = UnitName("target");

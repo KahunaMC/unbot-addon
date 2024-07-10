@@ -29,8 +29,22 @@ function RecvQuestReward(name, info)
 	end
 end
 
+-- A map of player name to frame
+local QRFrameMap = {};
+
 function ShowQuestReward(name, items)
+	if (name == nil or items == nil or #items == 0) then
+		return;
+	end
+	-- if we already have a frame for this player, remove it
+	if (QRFrameMap[name] ~= nil) then
+		UnBotRemoveByQRFrame(QRFrameMap[name]);
+		-- remove frame from the map
+		QRFrameMap[name] = nil;
+	end
 	local qrFrame = CreateFrame("Frame","QR"..name,UIParent,"QuestRewardFrame");
+	-- Add QR frame to the map
+	QRFrameMap[name] = qrFrame;
 	qrFrame.showTick = GetTime();
 	local qrLabel = _G[qrFrame:GetName().."TitleLabel"];
 	if (qrLabel ~= nil) then
